@@ -1,0 +1,7 @@
+%ifndef FFMT_MAC
+%define FFMT_MAC
+
+str_print_fmt:    db "%s", 10, 0          ; The printf format, "\n",'0'
+str_read_fmt: db "%s", 0
+
+%endif

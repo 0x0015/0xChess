@@ -1,0 +1,32 @@
+%ifndef MACROS_MAC 
+	%define MACROS_MAC 
+	
+	%macro str_print 1
+	    	push rbp
+	
+		mov rdi, str_print_fmt
+		mov rsi, %1
+		mov rax, 0
+		
+		call printf
+		
+		pop rbp
+	%endmacro
+
+	%macro str_read 1
+		push rbp
+
+		mov rdi, str_read_fmt
+		mov rsi, %1
+		mov rax, 0
+
+		call scanf
+
+		pop rbp
+	%endmacro
+
+	%macro return 1
+		mov rax,0
+		ret
+	%endmacro
+%endif

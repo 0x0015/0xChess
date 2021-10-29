@@ -1,0 +1,7 @@
+%ifndef EXTERNS_MAC
+%define EXTERNS_MAC
+
+extern printf
+extern scanf
+
+%endif
