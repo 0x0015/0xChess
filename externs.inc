@@ -3,5 +3,7 @@
 
 extern printf
 extern scanf
+extern strcmp
+extern strcat
 
 %endif
