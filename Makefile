@@ -1,6 +1,7 @@
 OBJS = main.o \
        uci.o \
-       chess.o
+       chess.o \
+       time.c.o
 
 OUT = main
 
@@ -14,6 +15,9 @@ all: $(OBJS)
 
 %.o: %.asm
 	nasm $(BUILD_FLAGS) -o $@ $<
+
+%.c.o: %.c
+	gcc -c -g -o $@ $<
 
 clean:
 	rm -f $(OBJS) $(OUT)

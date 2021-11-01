@@ -5,5 +5,6 @@ extern printf
 extern scanf
 extern strcmp
 extern strcat
+extern millis
 
 %endif

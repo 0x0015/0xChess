@@ -46,7 +46,7 @@
 		call stoi
 
 		pop rbp
-	%endmacro
+		%endmacro
 	
 	%macro str_substr 4;base string, write to substring, position, length
 		mov rax, %3;rax= position
@@ -75,5 +75,13 @@
 	%macro return 1
 		mov rax,0
 		ret
+	%endmacro
+
+	%macro millis 0
+		push rbp
+
+		call millis
+
+		pop rbp
 	%endmacro
 %endif

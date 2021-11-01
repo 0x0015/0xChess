@@ -2,6 +2,7 @@
 %include "macros.inc"
 %include "ffmt.inc"
 %include "main.inc"
+%include "chess.inc"
 
         section .data		; Data section, initialized variables
 uci_msg: db "uci", 0
@@ -139,6 +140,8 @@ uci_go:
 	str_substr readbuf, tempstr, 4, 8
 	str_cmp tempstr, infinite_msg
 	je uci_go_infinite
+
+	call generate_moves ;just a test for now 
 
 	jmp uci_end;if you found none of those, there is probably something wrong
 

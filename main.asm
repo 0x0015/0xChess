@@ -1,6 +1,7 @@
 %include "externs.inc"
 %include "macros.inc"
 %include "uci.inc"
+%include "chess.inc"
 
         section .data		; Data section, initialized variables
 global str_print_fmt
