@@ -60,6 +60,15 @@
 
 	%endmacro
 
+	%macro str_strlen 1
+		mov rdi, 0
+		%%loop:
+		mov cl, [%1+rax]
+		cmp cl, 0
+		jne %%loop
+		mov rax, rdi
+	%endmacro
+
 	%macro str_cat 2
 		push rbp
 

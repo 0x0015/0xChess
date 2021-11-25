@@ -37,6 +37,11 @@ readyok_msg: db "readyok", 0
 
 
         section .text           ; Code section.
+;algebraic notation
+convert_to_abn:
+ret;
+convert_from_abn:
+ret;
 
         global parse_uci
 parse_uci:
