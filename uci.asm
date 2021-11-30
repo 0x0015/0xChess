@@ -31,7 +31,7 @@ position_msg: db "position", 0
 ponderhit_msg: db "ponderhit",0
 
 
-id_msg: db "id name AsmChess", 0xA, "id author 0x15", 0;0xA is the ASCII code for newline.
+id_msg: db "id name 0xChess", 0xA, "id author 0x15", 0;0xA is the ASCII code for newline.
 uciok_msg: db "uciok",0
 readyok_msg: db "readyok", 0
 
