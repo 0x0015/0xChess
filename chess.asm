@@ -30,6 +30,8 @@ bestmove: dq 0
 ;		calculate moves for current boardstate, recurse....(I hope I can figure out how to do this)
 ;	decriment current search depth
 
+	section .text
+
 global generate_moves
 generate_moves:
 	mov rcx, 0
@@ -37,16 +39,24 @@ gm_sub_1:;loop for going through the different pieces in the bitboard
 	mov rdi, [boardstate + rcx]
 	cmp rdi, 0
 	je gm_next_piece;if any bitboard is empty, just go on to the next piece
+
+	;find piece pos.  x will be stored in r8b, and y in r9b.  both start in 0 at the bottom left corner.
 	bsr rax, rdi
+	mov rdx, 0;required or you get an error(?)
+	mov r11, 8
+	div r11;eight pieces per row.
+	mov r9b, al;bottom 8 bytes of rax
+	mov r8b, dl;bottom 8 bytes of rdx
+	
 	jmp gm_found_piece
 gm_next_piece:
 	inc rcx
-	cmp rcx, 32
+	cmp rcx, 32;if you have gone through all the moves, end.
 	jge generate_moves_end
 	jmp gm_sub_1
 
 generate_moves_end:
-	ret
+	ret;replace after figuring out the whole stack thing
 
 
 gm_found_piece:;when this is called, rax should be the result of the bsr
@@ -113,4 +123,4 @@ gm_board_le31:;w king
 	jmp gm_found_piece_end
 	
 gm_found_piece_end:
-
+	jmp gm_next_piece

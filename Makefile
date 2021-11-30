@@ -1,7 +1,7 @@
 OBJS = main.o \
        uci.o \
        chess.o \
-       time.c.o
+       time.o
 
 OUT = main
 
