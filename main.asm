@@ -7,7 +7,8 @@
 global str_print_fmt
 str_print_fmt:    db "%s", 10, 0          ; The printf format, "\n",'0'
 global str_read_fmt
-str_read_fmt: db "%s", 0; scanf format
+str_read_fmt: db "%2047[^",10,"]", 0; scanf format
+str_readNL_fmt: db "%s", 10, 0
 
 global readbuf
 readbuf: times 2048 db 0

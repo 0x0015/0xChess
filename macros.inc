@@ -16,13 +16,14 @@
 	%macro str_read 1
 		push rbp
 
-		mov rdi, str_read_fmt
-		mov rsi, %1
+		mov rdi, %1
+		mov rsi, 0
 		mov rax, 0
 
-		call scanf
+		call gets;so unsafe that I get yelled at for doing it in assembly
 
 		pop rbp
+
 	%endmacro
 
 	%macro str_cmp 2
@@ -57,6 +58,8 @@
 		inc rdx
 		cmp rdx, %4
 		jl %%loop
+		mov cl, 0
+		mov [%2+rdx], cl
 
 	%endmacro
 

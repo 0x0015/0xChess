@@ -3,6 +3,7 @@
 
 extern printf
 extern scanf
+extern gets
 extern strcmp
 extern strcat
 extern millis

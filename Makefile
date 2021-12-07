@@ -7,8 +7,8 @@ OUT = main
 
 BUILD_FLAGS = -felf64 -Fstabs
 BUILD_FLAGS_WIN = -fwin64
-LINK_OPTS = -dynamic-linker /lib64/ld-linux-x86-64.so.2 /usr/lib64/crt1.o /usr/lib64/crti.o -lc
-LINK_OPTS_EXTRA = /usr/lib64/crtn.o
+LINK_OPTS = -dynamic-linker /lib64/ld-linux-x86-64.so.2 /usr/lib/x86_64-linux-gnu/crt1.o /usr/lib/x86_64-linux-gnu/crti.o -lc
+LINK_OPTS_EXTRA = /usr/lib/x86_64-linux-gnu/crtn.o
 
 all: $(OBJS)
 	ld -o $(OUT) $(LINK_OPTS) $(OBJS) $(LINK_OPTS_EXTRA)

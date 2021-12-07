@@ -3,5 +3,6 @@
 
 extern str_print_fmt
 extern str_read_fmt
+extern str_readNL_fmt
 
 %endif

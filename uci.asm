@@ -19,7 +19,7 @@ btime_msg:db "btime",0
 winc_msg:db "winc",0
 binc_msg:db "binc",0
 movestogo_msg:db "movestogo",0
-depth_msg:db "dopth",0
+depth_msg:db "depth",0
 nodes_msg:db "nodes",0
 mate_msg:db "mate",0
 movetime_msg:db "movetime",0
@@ -45,7 +45,7 @@ ret;
 
         global parse_uci
 parse_uci:
-        ;str_print uci_msg
+        ;str_print readbuf;debug message
 
 	str_cmp readbuf, uci_msg
 	je uci_uci
@@ -53,6 +53,7 @@ parse_uci:
 	str_substr readbuf, tempstr, 0, 5
 	str_cmp tempstr, debug_msg
 	je uci_debug
+	
 
 	str_cmp readbuf, isready_msg
 	je uci_isready
@@ -88,11 +89,11 @@ uci_uci:
 	str_print uciok_msg
 	jmp uci_end
 uci_debug:
-	str_substr readbuf, tempstr, 7, 2
+	str_substr readbuf, tempstr, 6, 2
 	str_cmp tempstr, on_msg
 	je uci_debug_on
 
-	str_substr readbuf, tempstr, 7, 3
+	str_substr readbuf, tempstr, 6, 3
 	str_cmp tempstr, off_msg
 	je uci_debug_off
 uci_debug_on:
@@ -109,44 +110,45 @@ uci_isready:
 uci_setoption:
 	jmp uci_end
 uci_go:
-	str_substr readbuf, tempstr, 4, 11
+	str_substr readbuf, tempstr, 3, 11
 	str_cmp tempstr, searchmoves_msg
 	je uci_go_searchmoves
-	str_substr readbuf, tempstr, 4, 6
+	str_substr readbuf, tempstr, 3, 6
 	str_cmp tempstr, ponder_msg
 	je uci_go_ponder
-	str_substr readbuf, tempstr, 4, 5
+	str_substr readbuf, tempstr, 3, 5
 	str_cmp tempstr, wtime_msg
 	je uci_go_wtime
-	str_substr readbuf, tempstr, 4, 5
+	str_substr readbuf, tempstr, 3, 5
 	str_cmp tempstr, btime_msg
 	je uci_go_btime
-	str_substr readbuf, tempstr, 4, 4
+	str_substr readbuf, tempstr, 3, 4
 	str_cmp tempstr, winc_msg
 	je uci_go_winc
-	str_substr readbuf, tempstr, 4, 4
+	str_substr readbuf, tempstr, 3, 4
 	str_cmp tempstr, binc_msg
 	je uci_go_binc
-	str_substr readbuf, tempstr, 4, 9
+	str_substr readbuf, tempstr, 3, 9
 	str_cmp tempstr, movestogo_msg
 	je uci_go_movestogo
-	str_substr readbuf, tempstr, 4, 5
+	str_substr readbuf, tempstr, 3, 5
 	str_cmp tempstr, depth_msg
 	je uci_go_depth
-	str_substr readbuf, tempstr, 4, 5
+	str_substr readbuf, tempstr, 3, 5
 	str_cmp tempstr, nodes_msg
 	je uci_go_nodes
-	str_substr readbuf, tempstr, 4, 4
+	str_substr readbuf, tempstr, 3, 4
 	str_cmp tempstr, mate_msg
 	je uci_go_mate
-	str_substr readbuf, tempstr, 4, 8
+	str_substr readbuf, tempstr, 3, 8
 	str_cmp tempstr, movetime_msg
 	je uci_go_movetime
-	str_substr readbuf, tempstr, 4, 8
+	str_substr readbuf, tempstr, 3, 8
 	str_cmp tempstr, infinite_msg
 	je uci_go_infinite
 
-	call generate_moves ;just a test for now 
+	;str_print tempstr;debug messages
+	;call generate_moves ;just a test for now 
 
 	jmp uci_end;if you found none of those, there is probably something wrong
 
@@ -158,6 +160,8 @@ uci_go_winc:
 uci_go_binc:
 uci_go_movestogo:
 uci_go_depth:
+	str_print infinite_msg
+	jmp uci_end
 uci_go_nodes:
 uci_go_mate:
 uci_go_movetime:
