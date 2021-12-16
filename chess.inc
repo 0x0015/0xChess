@@ -3,5 +3,6 @@
 
 extern generate_moves
 extern bestmove
+extern reset_board
 
 %endif

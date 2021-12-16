@@ -29,7 +29,7 @@ global main
 main:
 
 setup:
-
+	call reset_board
 main_loop:
 
 	str_read readbuf

@@ -2,8 +2,10 @@
 %include "macros.inc"
 %include "ffmt.inc"
 %include "main.inc"
+%include "uci.inc"
 
         section .data
+starting_fen: db "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",0
 ;6 bytes used out of 8 bytes in a 64 bit register
 ;1byte source piece
 ;1byte dest piece
@@ -31,6 +33,12 @@ bestmove: dq 0
 ;	decriment current search depth
 
 	section .text
+global reset_board
+reset_board:
+	mov rax, starting_fen
+	call convert_from_fen
+	ret
+
 
 global generate_moves
 generate_moves:
@@ -86,40 +94,28 @@ gm_found_piece:;when this is called, rax should be the result of the bsr
 	jle gm_board_le31
 
 gm_board_le7:;b pawn
-	
 	jmp gm_found_piece_end
 gm_board_le9:;b rook
-	
 	jmp gm_found_piece_end
 gm_board_le11:;b knight
-	
 	jmp gm_found_piece_end
 gm_board_le13:;b bushop
-	
 	jmp gm_found_piece_end
 gm_board_le14:;b queen
-	
 	jmp gm_found_piece_end
 gm_board_le15:;b king
-	
 	jmp gm_found_piece_end
 gm_board_le23:;w pawn
-	
 	jmp gm_found_piece_end
 gm_board_le25:;w rook
-	
 	jmp gm_found_piece_end
 gm_board_le27:;w knight
-	
 	jmp gm_found_piece_end
 gm_board_le29:;w bushop
-	
 	jmp gm_found_piece_end
 gm_board_le30:;w queen
-	
 	jmp gm_found_piece_end
 gm_board_le31:;w king
-	
 	jmp gm_found_piece_end
 	
 gm_found_piece_end:

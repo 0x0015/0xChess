@@ -37,11 +37,120 @@ readyok_msg: db "readyok", 0
 
 
         section .text           ; Code section.
+;forsyth-edwards notation(fen)
+global convert_to_fen:
+convert_to_fen:
+	ret
+global convert_from_fen
+convert_from_fen:;fen should be stored in rax
+	mov r8b, 0;piece x pos
+	mov r9b, 0;piece y pos
+	mov rcx, 0;fenstring letter counter
+fen_piece_placement_parse_char:
+	mov rdx, [rax+rcx]
+	cmp rdx, 0
+	je fen_end
+	cmp rdx, "p"
+	je fen_bp
+	cmp rdx, "n"
+	je fen_bn
+	cmp rdx, "b"
+	je fen_bb
+	cmp rdx, "r"
+	je fen_br
+	cmp rdx, "q"
+	je fen_bq
+	cmp rdx, "k"
+	je fen_bk
+	cmp rdx, "P"
+	je fen_wp
+	cmp rdx, "N"
+	je fen_wn
+	cmp rdx, "B"
+	je fen_wb
+	cmp rdx, "R"
+	je fen_wr
+	cmp rdx, "Q"
+	je fen_wq
+	cmp rdx, "K"
+	je fen_wk
+	cmp rdx, "/"
+	je fen_pn_slash
+	cmp rdx, "1"
+	je fen_pn_1
+	cmp rdx, "2"
+	je fen_pn_2
+	cmp rdx, "3"
+	je fen_pn_3
+	cmp rdx, "4"
+	je fen_pn_4
+	cmp rdx, "5"
+	je fen_pn_5
+	cmp rdx, "6"
+	je fen_pn_6
+	cmp rdx, "7"
+	je fen_pn_7
+	cmp rdx, "8"
+	je fen_pn_8
+	cmp rdx, " "
+	je fen_pn_space
+
+fen_piece_placement_parse_char_end:
+	inc rcx
+	jmp fen_piece_placement_parse_char
+	
+
+fen_bp:;add these.  you can compare the bitboards against 0 to check if they have a piece
+fen_bn:
+fen_bb:
+fen_br:
+fen_bq:
+fen_bk:
+fen_wp:
+fen_wn:
+fen_wb:
+fen_wr:
+fen_wq:
+fen_wk:
+fen_pn_slash:
+	mov r8b, 0 
+	inc r9b
+	jmp fen_piece_placement_parse_char_end
+fen_pn_8:
+	inc r8b
+fen_pn_7:
+	inc r8b
+fen_pn_6:
+	inc r8b
+fen_pn_5:
+	inc r8b
+fen_pn_4:
+	inc r8b
+fen_pn_3:
+	inc r8b
+fen_pn_2:
+	inc r8b
+fen_pn_1:
+	inc r8b
+	jmp fen_piece_placement_parse_char_end
+jmp fen_piece_placement_parse_char_end
+fen_pn_space:
+	inc rcx
+	;move on to piece placement end.  no jmp needed
+fen_piece_placement_end:
+;side to move
+;castling
+;en passant
+;halfmove clock
+;fullmove counter
+
+fen_end:
+	ret
 ;algebraic notation
 convert_to_abn:
-ret;
+	ret
 convert_from_abn:
-ret;
+	ret
 
         global parse_uci
 parse_uci:
@@ -148,7 +257,7 @@ uci_go:
 	je uci_go_infinite
 
 	;str_print tempstr;debug messages
-	;call generate_moves ;just a test for now 
+	call generate_moves ;just a test for now 
 
 	jmp uci_end;if you found none of those, there is probably something wrong
 
