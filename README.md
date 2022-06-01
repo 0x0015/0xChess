@@ -1,4 +1,4 @@
 # 0xChess
-A chess implimentation in assembly
+A chess implimentation in assembly.  Currently unfinished.
 
-DO NOT EXPECT THIS TO WORK IN ANY TIMELY MANNER(if ever)
+DO NOT EXPECT THIS TO BE COMPLETED
